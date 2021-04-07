@@ -10,13 +10,13 @@ import SafariServices
 import MessageUI
 
 class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, MFMailComposeViewControllerDelegate, MFMessageComposeViewControllerDelegate {
-
+    
     @IBOutlet weak var imageView: UIImageView!
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
     }
-
+    
     @IBAction func shareButtonAction(_ sender: UIButton) {
         guard let image = imageView.image else { return }
         let activityController = UIActivityViewController (activityItems: [image], applicationActivities: nil)
@@ -41,23 +41,23 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
         alertController.addAction(cancelAction)
-
+        
         if UIImagePickerController.isSourceTypeAvailable(.camera) {
             let cameraAction = UIAlertAction(title: "Camera", style: .default, handler: {
                 action in imagePicker.sourceType = .camera
                 self.present(imagePicker, animated: true, completion: nil)
             })
             alertController.addAction(cameraAction)
-
+            
         }
         
         if UIImagePickerController.isSourceTypeAvailable(.photoLibrary) {
-            let photoLibraryAction = UIAlertAction(title: "Photo Library", style: .default, handler: {
-                action in imagePicker.sourceType = .photoLibrary
+            let photoLibraryAction = UIAlertAction(title: "Photo Library", style: .default, handler: { action in
+                imagePicker.sourceType = .photoLibrary
                 self.present(imagePicker, animated: true, completion: nil)
             })
             alertController.addAction(photoLibraryAction)
-
+            
         }
         
         alertController.popoverPresentationController?.sourceView = sender
